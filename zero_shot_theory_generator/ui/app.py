@@ -1,9 +1,13 @@
+import sys, os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import gradio as gr
-from ..utils.file_utils import load_dataset_path
-from ..core.dataset_loader import detect_dataset
-from ..core.task_inference import infer_task
-from ..core.pipeline_suggester import suggest_pipeline
-from ..core.theory_generator import generate_theory
+from zero_shot_theory_generator.utils.file_utils import load_dataset_path
+from zero_shot_theory_generator.core.dataset_loader import detect_dataset
+from zero_shot_theory_generator.core.task_inference import infer_task
+from zero_shot_theory_generator.core.pipeline_suggester import suggest_pipeline
+from zero_shot_theory_generator.core.theory_generator import generate_theory
+from zero_shot_theory_generator.utils.logger import log_output
 
 def analyze(path):
     dataset_path = load_dataset_path(path)
@@ -11,7 +15,14 @@ def analyze(path):
     task = infer_task(meta)
     pipeline = suggest_pipeline(task, meta)
     theory = generate_theory(meta, task, pipeline)
-    return str(meta), str(task), str(pipeline), str(theory)
+    report = {
+        "metadata": meta,
+        "task": task,
+        "pipeline": pipeline,
+        "theory": theory
+    }
+    log_output(report)
+    return str(meta), str(task), str(pipeline), str(theory), "Report saved to outputs/reports/"
 
 with gr.Blocks() as demo:
     gr.Markdown("# 🧠 Zero-Shot Theory Generator")
@@ -23,8 +34,9 @@ with gr.Blocks() as demo:
     with gr.Row():
         pipeline = gr.Textbox(label="Pipeline Suggestion", interactive=False)
         theory = gr.Textbox(label="Generated Theory", interactive=False)
+    msg = gr.Textbox(label="Status", interactive=False)
     btn = gr.Button("Analyze")
-    btn.click(analyze, inputs=path, outputs=[meta, task, pipeline, theory])
+    btn.click(analyze, inputs=path, outputs=[meta, task, pipeline, theory, msg])
 
 if __name__ == "__main__":
     demo.launch()
