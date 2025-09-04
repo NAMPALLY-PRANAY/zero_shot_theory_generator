@@ -7,10 +7,6 @@ from zero_shot_theory_generator.core.dataset_loader import detect_dataset
 from zero_shot_theory_generator.core.task_inference import infer_task
 from zero_shot_theory_generator.core.pipeline_suggester import suggest_pipeline
 from zero_shot_theory_generator.core.theory_generator import generate_theory
-<<<<<<< HEAD
-=======
-from zero_shot_theory_generator.utils.logger import log_output
->>>>>>> a29e7fe64bc860d9de276f03526742f355e39fc2
 
 def analyze(path):
     dataset_path = load_dataset_path(path)
