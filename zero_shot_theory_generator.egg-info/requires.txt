@@ -1,0 +1,13 @@
+datasets
+gradio
+lime
+numpy
+openai
+pandas
+python-dotenv
+requests
+scikit-learn
+shap
+torch
+torchvision
+transformers
