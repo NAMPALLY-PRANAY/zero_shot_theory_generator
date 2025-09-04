@@ -1,0 +1,8 @@
+# Existing content of .gitignore
+# ...
+
+# Ignore environment variable files
+.env
+.venv/.env
+
+# ...
