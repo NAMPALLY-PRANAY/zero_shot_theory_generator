@@ -1,0 +1,184 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Uber Data Analytics Dashboard | Kaggle</title>
+  <meta charset="utf-8" />
+    <meta name="robots" content="index, follow" />
+  <meta name="description" content="Complete ride-sharing data with bookings, ratings &amp; revenue" />
+    <meta name="keywords" content="automobiles and vehicles,travel,data visualization,exploratory data analysis,india" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <meta name="theme-color" content="#008ABC" />
+  <script nonce="SIHIm8pWGWO7ITEM3OyAFA==" type="text/javascript">
+    window["pageRequestStartTime"] = 1756978849271;
+    window["pageRequestEndTime"] = 1756978849364;
+    window["initialPageLoadStartTime"] = new Date().getTime();
+  </script>
+  <script nonce="SIHIm8pWGWO7ITEM3OyAFA==" id="gsi-client" src="https://accounts.google.com/gsi/client" async defer></script>
+  <script nonce="SIHIm8pWGWO7ITEM3OyAFA==">window.KAGGLE_JUPYTERLAB_PATH = "/static/assets/jupyterlab-v4/jupyterlab-index-0b238da17aa3781502cc.html";</script>
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin="anonymous" /><link rel="preconnect" href="https://stats.g.doubleclick.net" /><link rel="preconnect" href="https://storage.googleapis.com" /><link rel="preconnect" href="https://apis.google.com" />
+    <link href="/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon" id="dynamic-favicon" />
+  <link rel="manifest" href="/static/json/manifest.json" crossorigin="use-credentials">
+
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,400i,500,500i,600,600i,700,700i&display=swap"
+    rel="preload" as="style" />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Symbols:FILL@0..1&display=block"
+    rel="preload" as="style" />
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,400i,500,500i,600,600i,700,700i&display=swap"
+    rel="stylesheet" media="print" id="async-google-font-1" />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Symbols:FILL@0..1&display=block"
+    rel="stylesheet" media="print" id="async-google-font-2" />
+  <script nonce="SIHIm8pWGWO7ITEM3OyAFA==" type="text/javascript">
+    const styleSheetIds = ["async-google-font-1", "async-google-font-2"];
+    styleSheetIds.forEach(function (id) {
+      document.getElementById(id).addEventListener("load", function() {
+        this.media = "all";
+      });
+    });
+  </script>
+
+
+    <link rel="canonical" href="https://www.kaggle.com/datasets/yashdevladdha/uber-ride-analytics-dashboard" />
+    <link rel="stylesheet" type="text/css" href="/static/assets/app.css?v=2d4e7ec4eb689d926191" />
+
+  
+    
+ 
+      <script nonce="SIHIm8pWGWO7ITEM3OyAFA==">
+        try{(function(a,s,y,n,c,h,i,d,e){d=s.createElement("style");
+        d.appendChild(s.createTextNode(""));s.head.appendChild(d);d=d.sheet;
+        y=y.map(x => d.insertRule(x + "{ opacity: 0 !important }"));
+        h.start=1*new Date;h.end=i=function(){y.forEach(x => x<d.cssRules.length ? d.deleteRule(x) : {})};
+        (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+        })(window,document,['.site-header-react__nav'],'dataLayer',2000,{'GTM-52LNT9S':true});}catch(ex){}
+    </script>
+    <script nonce="SIHIm8pWGWO7ITEM3OyAFA==">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-T7QHS60L4Q', {
+            'optimize_id': 'GTM-52LNT9S',
+            'displayFeaturesTask': null,
+            'send_page_view': false,
+            'content_group1': 'Datasets'
+        });
+    </script>
+    <script nonce="SIHIm8pWGWO7ITEM3OyAFA==" async src="https://www.googletagmanager.com/gtag/js?id=G-T7QHS60L4Q"></script>
+
+  
+    
+    <meta property="og:url" content="https://www.kaggle.com/datasets/yashdevladdha/uber-ride-analytics-dashboard" />
+    <meta property="og:title" content="Uber Data Analytics Dashboard" />
+    <meta property="og:description" content="Complete ride-sharing data with bookings, ratings &amp; revenue" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://storage.googleapis.com/kaggle-datasets-images/8032385/12709117/09f5959223f9b52bd29c4c23d4fdc1fc/dataset-card.png?t=2025-08-08-10-27-00" />
+    <meta property="fb:app_id" content="2665027677054710" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@kaggledatasets" />
+
+
+  <meta name="twitter:site" content="@Kaggle" /> 
+  
+    
+            <script nonce="SIHIm8pWGWO7ITEM3OyAFA==" type="application/ld+json">{"@context":"http://schema.org/","@type":"Dataset","name":"Uber Data Analytics Dashboard","description":"\n## 🚗 Uber Ride Analytics Dataset 2024\n\nThis comprehensive dataset contains detailed ride-sharing data from Uber operations for the year 2024, providing rich insights into booking patterns, vehicle performance, revenue streams, cancellation behaviors, and customer satisfaction metrics.\n\n### 📊 Dataset Overview\n\nThe dataset captures **148,770 total bookings** across multiple vehicle types and provides a complete view of ride-sharing operations including successful rides, cancellations, customer behaviors, and financial metrics.\n-\n### **Key Statistics:**\n- **Total Bookings**: 148.77K rides\n- **Success Rate**: 65.96% (93K completed rides)\n- **Cancellation Rate**: 25% (37.43K cancelled bookings)\n- **Customer Cancellations**: 19.15% (27K rides)\n- **Driver Cancellations**: 7.45% (10.5K rides)\n\n### 📋 Data Schema\n\nThe dataset contains the following columns:\n\n| Column Name | Description |\n|-------------|-------------|\n| `Date` | Date of the booking |\n| `Time` | Time of the booking |\n| `Booking ID` | Unique identifier for each ride booking |\n| `Booking Status` | Status of booking (Completed, Cancelled by Customer, Cancelled by Driver, etc.) |\n| `Customer ID` | Unique identifier for customers |\n| `Vehicle Type` | Type of vehicle (Go Mini, Go Sedan, Auto, eBike/Bike, UberXL, Premier Sedan) |\n| `Pickup Location` | Starting location of the ride |\n| `Drop Location` | Destination location of the ride |\n| `Avg VTAT` | Average time for driver to reach pickup location (in minutes) |\n| `Avg CTAT` | Average trip duration from pickup to destination (in minutes) |\n| `Cancelled Rides by Customer` | Customer-initiated cancellation flag |\n| `Reason for cancelling by Customer` | Reason for customer cancellation |\n| `Cancelled Rides by Driver` | Driver-initiated cancellation flag |\n| `Driver Cancellation Reason` | Reason for driver cancellation |\n| `Incomplete Rides` | Incomplete ride flag |\n| `Incomplete Rides Reason` | Reason for incomplete rides |\n| `Booking Value` | Total fare amount for the ride |\n| `Ride Distance` | Distance covered during the ride (in km) |\n| `Driver Ratings` | Rating given to driver (1-5 scale) |\n| `Customer Rating` | Rating given by customer (1-5 scale) |\n| `Payment Method` | Method used for payment (UPI, Cash, Credit Card, Uber Wallet, Debit Card) |\n\n### 🚗 Vehicle Fleet Coverage\n\n| Vehicle Type | Total Bookings | Success Rate | Avg Distance | Total Distance |\n|--------------|----------------|--------------|---------------|----------------|\n| Auto | 12.88M | 91.1% | 25.99 km | 602K km |\n| eBike/Bike | 11.46M | 91.1% | 26.11 km | 537K km |\n| Go Mini | 10.34M | 91.0% | 25.99 km | 482K km |\n| Go Sedan | 9.37M | 91.1% | 25.98 km | 433K km |\n| Premier Sedan | 6.28M | 91.2% | 25.95 km | 292K km |\n| UberXL | 1.53M | 92.2% | 25.72 km | 72K km |\n\n### 💰 Revenue Distribution by Payment Method\n- **UPI**: Highest contributor (~40% of total revenue)\n- **Cash**: Second highest (~25% of total revenue)\n- **Credit Card**: ~15% of total revenue\n- **Uber Wallet**: ~12% of total revenue\n- **Debit Card**: ~8% of total revenue\n\n### 🚫 Cancellation Patterns\n\n#### Customer Cancellation Reasons:\n- **Wrong Address**: 22.5%\n- **Driver Issues**: 22.4%\n- **Driver Not Moving**: 22.2%\n- **Change of Plans**: 21.9%\n- **App Issues**: 11.0%\n\n#### Driver Cancellation Reasons:\n- **Capacity Issues**: 25.0%\n- **Customer Related Issues**: 25.3%\n- **Personal &amp; Car Issues**: 24.9%\n- **Customer Behavior**: 24.8%\n\n### ⭐ Rating Analysis\n- **Customer Ratings**: Consistently high across all vehicle types (4.40-4.41)\n- **Driver Ratings**: Slightly lower but stable (4.23-4.24)\n- **Highest Rated**: Go Sedan (4.41 customer rating)\n- **Most Satisfied Drivers**: UberXL category (4.24 rating)\n\n### 📈 Data Quality\n- **Completeness**: Comprehensive coverage with minimal missing values\n- **Consistency**: Standardized vehicle types and status categories\n- **Temporal Coverage**: Full year 2024 data with daily granularity\n- **Geographic Scope**: Multiple pickup and drop locations\n- **Balanced Distribution**: Good representation across all vehicle types and time periods.\n","url":"https://www.kaggle.com/yashdevladdha/uber-ride-analytics-dashboard","version":2,"keywords":["subject, science and technology, transportation, automobiles and vehicles","subject, people and society, business, travel","technique, data visualization","technique, exploratory data analysis","geography and places, asia, india"],"license":{"@type":"CreativeWork","name":"CC BY-SA 4.0","url":"https://creativecommons.org/licenses/by-sa/4.0/"},"identifier":["8032385"],"includedInDataCatalog":{"@type":"DataCatalog","name":"Kaggle","url":"https://www.kaggle.com"},"creator":{"@type":"Person","name":"Yash Dev Laddha","url":"https://www.kaggle.com/yashdevladdha","image":"https://storage.googleapis.com/kaggle-avatars/thumbnails/17122148-kg.JPG?t=2025-08-05-09-15-00"},"distribution":[{"@type":"DataDownload","requiresSubscription":true,"encodingFormat":"zip","fileFormat":"zip","contentUrl":"https://www.kaggle.com/datasets/yashdevladdha/uber-ride-analytics-dashboard/download?datasetVersionNumber=2","contentSize":"17324552 bytes"}],"commentCount":4,"dateModified":"2025-08-08T11:13:42.92Z","discussionUrl":"https://www.kaggle.com/yashdevladdha/uber-ride-analytics-dashboard/discussion","alternateName":"Complete ride-sharing data with bookings, ratings &amp; revenue","isAccessibleForFree":true,"thumbnailUrl":"https://storage.googleapis.com/kaggle-datasets-images/8032385/12709117/09f5959223f9b52bd29c4c23d4fdc1fc/dataset-card.png?t=2025-08-08-10-27-00","interactionStatistic":[{"@type":"InteractionCounter","interactionType":"http://schema.org/CommentAction","userInteractionCount":4},{"@type":"InteractionCounter","interactionType":"http://schema.org/DownloadAction","userInteractionCount":35233},{"@type":"InteractionCounter","interactionType":"http://schema.org/ViewAction","userInteractionCount":141902},{"@type":"InteractionCounter","interactionType":"http://schema.org/LikeAction","userInteractionCount":803}]}</script>
+        
+
+  
+    
+
+  
+    
+
+
+    <script nonce="SIHIm8pWGWO7ITEM3OyAFA==">window['useKaggleAnalytics'] = true;</script>
+
+  <script id="gapi-target" nonce="SIHIm8pWGWO7ITEM3OyAFA==" src="https://apis.google.com/js/api.js" defer
+    async></script>
+  <script nonce="SIHIm8pWGWO7ITEM3OyAFA==" src="/static/assets/runtime.js?v=33d13e33b204c4eb1830"></script>
+  <script nonce="SIHIm8pWGWO7ITEM3OyAFA==" src="/static/assets/vendor.js?v=93540707f793d66d045a"></script>
+  <script nonce="SIHIm8pWGWO7ITEM3OyAFA==" src="/static/assets/app.js?v=02cd0871599dce515974"></script>
+    <script nonce="SIHIm8pWGWO7ITEM3OyAFA==" type="text/javascript">
+      window.kaggleStackdriverConfig = {
+        key: 'AIzaSyA4eNqUdRRskJsCZWVz-qL655Xa5JEMreE',
+        projectId: 'kaggle-161607',
+        service: 'web-fe',
+        version: 'ci',
+        userId: '0'
+      }
+    </script>
+</head>
+<body>
+  <div id="root">
+    
+
+
+
+
+
+
+
+
+<script nonce="SIHIm8pWGWO7ITEM3OyAFA==" type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    jax: ['input/TeX', 'output/SVG'],
+    "HTML-CSS": {
+    preferredFont: "TeX",
+    availableFonts: ["STIX", "TeX"],
+    linebreaks: {
+    automatic: true
+    },
+    EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+    inlineMath: [["\\(", "\\)"], ["\\\\(", "\\\\)"]],
+    displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+    processEscapes: true,
+    ignoreClass: "tex2jax_ignore|dno"
+    },
+    TeX: {
+    noUndefined: {
+    attributes: {
+    mathcolor: "red",
+    mathbackground: "#FFEEEE",
+    mathsize: "90%"
+    }
+    }
+    },
+    Macros: {
+    href: "{}"
+    },
+    skipStartupTypeset: true,
+    messageStyle: "none",
+    extensions: ["Safe.js"],
+    });
+</script>
+<script type="text/javascript" nonce="SIHIm8pWGWO7ITEM3OyAFA==">
+  window.addEventListener("DOMContentLoaded", () => {
+    const head = document.getElementsByTagName("head")[0];
+    const lib = document.createElement("script");
+    lib.type = "text/javascript";
+    // Always use the production asset in local dev, which is served from GCS. We tried to proxy and / or serve this
+    // in a better way in localhost, but it didn't work out. See b/328073416#comment8 for details.
+    const forceProdHost = window.location.hostname === "localhost";
+    lib.src = `${forceProdHost ? "https://www.kaggle.com" : ""}/static/mathjax/2.7.9/MathJax.js?config=TeX-AMS_SVG`;
+    head.appendChild(lib);
+  });
+</script>
+
+
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>

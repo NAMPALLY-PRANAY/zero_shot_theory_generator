@@ -1,5 +1,5 @@
 import os, json, time
-from config.settings import OUTPUT_DIR
+from zero_shot_theory_generator.config.settings import OUTPUT_DIR
 
 def log_output(report):
     os.makedirs(f"{OUTPUT_DIR}/reports", exist_ok=True)

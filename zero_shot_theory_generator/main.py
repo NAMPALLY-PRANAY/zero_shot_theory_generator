@@ -1,10 +1,10 @@
 import argparse
-from utils.file_utils import load_dataset_path
-from core.dataset_loader import detect_dataset
-from core.task_inference import infer_task
-from core.pipeline_suggester import suggest_pipeline
-from core.theory_generator import generate_theory
-from utils.logger import log_output
+from zero_shot_theory_generator.utils.file_utils import load_dataset_path
+from zero_shot_theory_generator.core.dataset_loader import detect_dataset
+from zero_shot_theory_generator.core.task_inference import infer_task
+from zero_shot_theory_generator.core.pipeline_suggester import suggest_pipeline
+from zero_shot_theory_generator.core.theory_generator import generate_theory
+from zero_shot_theory_generator.utils.logger import log_output
 
 def main():
     parser = argparse.ArgumentParser(description="Zero-Shot Theory Generator")

@@ -1,9 +1,9 @@
 import gradio as gr
-from ..utils.file_utils import load_dataset_path
-from ..core.dataset_loader import detect_dataset
-from ..core.task_inference import infer_task
-from ..core.pipeline_suggester import suggest_pipeline
-from ..core.theory_generator import generate_theory
+from zero_shot_theory_generator.utils.file_utils import load_dataset_path
+from zero_shot_theory_generator.core.dataset_loader import detect_dataset
+from zero_shot_theory_generator.core.task_inference import infer_task
+from zero_shot_theory_generator.core.pipeline_suggester import suggest_pipeline
+from zero_shot_theory_generator.core.theory_generator import generate_theory
 
 def analyze(path):
     dataset_path = load_dataset_path(path)
