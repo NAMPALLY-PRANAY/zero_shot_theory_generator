@@ -9,6 +9,6 @@ This project automatically:
 
 ## 🛠️ Setup
 ```bash
-git clone <your_repo>
+git clone https://github.com/NAMPALLY-PRANAY/zero_shot_theory_generator.git
 cd zero_shot_theory_generator
 pip install -r requirements.txt
