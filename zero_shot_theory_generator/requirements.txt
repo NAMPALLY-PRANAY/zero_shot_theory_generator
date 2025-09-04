@@ -10,6 +10,5 @@ shap
 lime
 python-dotenv
 requests
-openai
+google-generativeai
 kaggle
-datasets

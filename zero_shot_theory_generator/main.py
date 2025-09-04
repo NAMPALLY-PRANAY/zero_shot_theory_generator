@@ -1,4 +1,6 @@
 import argparse
+import os
+from zero_shot_theory_generator.config.settings import OUTPUT_DIR
 from zero_shot_theory_generator.utils.file_utils import load_dataset_path
 from zero_shot_theory_generator.core.dataset_loader import detect_dataset
 from zero_shot_theory_generator.core.task_inference import infer_task
@@ -26,8 +28,9 @@ def main():
         "theory": theory
     }
 
+    os.makedirs(os.path.join(OUTPUT_DIR, "reports"), exist_ok=True)
     log_output(report)
-    print("\n=== Report saved to outputs/reports/ ===")
+    print(f"\n=== Report saved to {os.path.join(OUTPUT_DIR, 'reports')}/ ===")
 
 if __name__ == "__main__":
     main()

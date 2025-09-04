@@ -2,7 +2,11 @@ def infer_task(meta):
     if meta["type"] == "image_folder":
         return {"task": "image_classification", "confidence": 0.95}
 
+    # Detect tabular with image columns for CNN optimization
     if meta["type"] == "tabular":
+        image_cols = [c for c in meta["columns"] if c["name"].lower() in ("image_path", "image_url", "img", "image")]
+        if image_cols:
+            return {"task": "image_classification", "input": image_cols[0]["name"], "confidence": 0.9}
         for c in meta["columns"]:
             if c["name"].lower() in ("target", "label", "y"):
                 if c["n_unique"] <= 50:

@@ -1,7 +1,8 @@
-from zero_shot_theory_generator.config.settings import OPENAI_API_KEY
-import openai
+from zero_shot_theory_generator.config.settings import GEMINI_API_KEY
+import google.generativeai as genai
 
-openai.api_key = OPENAI_API_KEY
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
 
 def generate_theory(meta, task, pipeline):
     base_theories = []
@@ -15,15 +16,23 @@ def generate_theory(meta, task, pipeline):
                 else:
                     base_theories.append("Binary tasks align well with logistic loss functions.")
 
+    if not GEMINI_API_KEY:
+        return {"rules": base_theories, "llm": "Gemini LLM error: GOOGLE_API_KEY not set. Please set it in your .env file."}
+
     try:
-        response = openai.resources.chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                {"role":"system", "content":"You are an AI that generates ML theory insights."},
-                {"role":"user", "content":f"Dataset metadata: {meta}\nTask: {task}\nPipeline: {pipeline}\nSuggest 3 scientific insights."}
-            ]
+        model = genai.GenerativeModel("gemini-1.5-flash")
+        prompt = (
+            "You are an AI that generates ML theory insights.\n"
+            f"Dataset metadata: {meta}\nTask: {task}\nPipeline: {pipeline}\n"
+            "Suggest 3 scientific insights. Format your answer in Markdown with clear sections."
         )
-        llm_theory = response.choices[0].message.content
+        response = model.generate_content(prompt)
+        llm_theory = response.text if hasattr(response, "text") else str(response)
+        llm_theory = llm_theory.replace("\n\n", "\n").strip()
         return {"rules": base_theories, "llm": llm_theory}
     except Exception as e:
-        return {"rules": base_theories, "llm": f"LLM error: {e}\nIf you are using openai>=1.0.0, make sure your API usage matches the new interface. See https://github.com/openai/openai-python for details."}
+        err_msg = (
+            f"Gemini LLM error: {e}\n"
+            "Check that GOOGLE_API_KEY is set in your environment or .env file."
+        )
+        return {"rules": base_theories, "llm": err_msg}

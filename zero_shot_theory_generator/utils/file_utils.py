@@ -7,11 +7,9 @@ def is_kaggle_url(path):
     return "kaggle.com/" in path
 
 def is_hf_slug(path):
-    # Accept slugs like "facebook/recycling_the_web"
     return bool(re.match(r"^[\w\-]+/[\w\-]+$", path))
 
 def is_hf_url(path):
-    # Accept URLs like "https://huggingface.co/datasets/facebook/recycling_the_web"
     return path.startswith("https://huggingface.co/datasets/")
 
 def download_kaggle(path):
@@ -20,9 +18,12 @@ def download_kaggle(path):
         raise ValueError("Invalid Kaggle URL format.")
     dataset = match.group(1)
     out_dir = tempfile.mkdtemp(prefix="kaggle_")
-    subprocess.run([
-        "kaggle", "datasets", "download", "-d", dataset, "-p", out_dir, "--unzip"
-    ], check=True)
+    try:
+        subprocess.run([
+            "kaggle", "datasets", "download", "-d", dataset, "-p", out_dir, "--unzip"
+        ], check=True)
+    except Exception as e:
+        raise RuntimeError(f"Kaggle download failed: {e}")
     for f in os.listdir(out_dir):
         fp = os.path.join(out_dir, f)
         if os.path.isfile(fp):
@@ -31,7 +32,6 @@ def download_kaggle(path):
 
 def download_hf(path):
     from datasets import load_dataset
-    # Accept both URLs and slugs
     if is_hf_url(path):
         parts = path.rstrip("/").split("/")
         dataset = "/".join(parts[-2:])
@@ -54,19 +54,21 @@ def load_dataset_path(path_or_url):
     ):
         import requests
         fname = path_or_url.split("/")[-1]
-        local_path = os.path.join("downloads", fname)
-        os.makedirs("downloads", exist_ok=True)
-        r = requests.get(path_or_url)
-        with open(local_path, "wb") as f:
-            f.write(r.content)
+        downloads_dir = os.path.abspath("downloads")
+        os.makedirs(downloads_dir, exist_ok=True)
+        local_path = os.path.join(downloads_dir, fname)
+        try:
+            r = requests.get(path_or_url)
+            r.raise_for_status()
+            with open(local_path, "wb") as f:
+                f.write(r.content)
+        except Exception as e:
+            raise RuntimeError(f"Failed to download file: {e}")
         return local_path
-    # Hugging Face detection (slug or URL)
     if is_hf_url(path_or_url) or is_hf_slug(path_or_url):
         return download_hf(path_or_url)
-    # Kaggle detection
     if is_kaggle_url(path_or_url):
         return download_kaggle(path_or_url)
-    # Local file
     if os.path.exists(path_or_url):
         return path_or_url
     raise FileNotFoundError(f"Dataset path not found: {path_or_url}")

@@ -27,4 +27,13 @@ def suggest_pipeline(task, meta):
             "loss": "CrossEntropy",
             "metrics": ["f1", "precision", "recall"]
         }
+    if task["task"] == "unsupervised":
+        n_cols = len(meta.get("columns", []))
+        pipeline = {
+            "preprocessing": ["StandardScaler"] if n_cols > 0 else [],
+            "clustering": "KMeans" if n_cols < 10 else "DBSCAN",
+            "dimensionality_reduction": "PCA" if n_cols < 20 else "t-SNE",
+            "metrics": ["silhouette_score", "calinski_harabasz"]
+        }
+        return pipeline
     return {"pipeline": "unknown"}
