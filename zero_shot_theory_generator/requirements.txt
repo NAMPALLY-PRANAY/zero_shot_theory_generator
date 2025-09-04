@@ -11,3 +11,5 @@ lime
 python-dotenv
 requests
 openai
+kaggle
+datasets
