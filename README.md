@@ -128,7 +128,7 @@ echo GOOGLE_API_KEY=<APIKEY> > .env
 
 - **Web GUI:**  
   ```bash
-  gradio app.py
+  python app.py
   ```
 - **Command Line Interface:**  
   ```bash
