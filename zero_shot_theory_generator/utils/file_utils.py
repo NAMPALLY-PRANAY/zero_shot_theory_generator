@@ -80,26 +80,42 @@ def load_dataset_path(path_or_url: str) -> str:
     if kaggle_slug:
         print(f"[INFO] Downloading Kaggle dataset: {kaggle_slug}")
         try:
-            # ✅ Download Kaggle dataset to a local folder
             dataset_path = kagglehub.dataset_download(kaggle_slug)
+            # If it's a directory, try to pick the "best" file for ML
+            if os.path.isdir(dataset_path):
+                # Collect all usable files (support all common ML file types)
+                usable_files = []
+                supported_exts = (
+                    '.csv', '.xlsx', '.xls', '.json', '.txt', '.parquet',
+                    '.tsv', '.npz', '.npy', '.jpg', '.jpeg', '.png', '.bmp', '.gif', '.zip'
+                )
+                for root, dirs, files in os.walk(dataset_path):
+                    for file in files:
+                        if file.lower().endswith(supported_exts):
+                            usable_files.append(os.path.join(root, file))
+                # If only one file, return it
+                if len(usable_files) == 1:
+                    return os.path.abspath(usable_files[0])
+                # If multiple files, prefer the largest CSV, then largest file, then a folder for images/zips
+                if usable_files:
+                    # Prefer CSV, then Parquet, then Excel, then JSON, then TXT, then NPZ/NPY, then ZIP, then images
+                    ext_priority = [
+                        '.csv', '.parquet', '.xlsx', '.xls', '.json', '.txt', '.tsv', '.npz', '.npy', '.zip',
+                        '.jpg', '.jpeg', '.png', '.bmp', '.gif'
+                    ]
+                    for ext in ext_priority:
+                        files_of_type = [f for f in usable_files if f.lower().endswith(ext)]
+                        if files_of_type:
+                            best_file = max(files_of_type, key=lambda f: os.path.getsize(f))
+                            return os.path.abspath(best_file)
+                    # Fallback: largest file of any supported type
+                    best_file = max(usable_files, key=lambda f: os.path.getsize(f))
+                    return os.path.abspath(best_file)
+                # If no usable files, return the directory (for image datasets, etc.)
+                return os.path.abspath(dataset_path)
+            return os.path.abspath(dataset_path)
         except Exception as e:
             raise RuntimeError(f"Failed to load Kaggle dataset: {e}")
-
-        # Look for CSV files inside the dataset folder
-        csv_files = []
-        for root, _, files in os.walk(dataset_path):
-            for f in files:
-                if f.endswith(".csv"):
-                    csv_files.append(os.path.join(root, f))
-
-        if not csv_files:
-            raise RuntimeError("No CSV files found in Kaggle dataset")
-
-        # If multiple CSVs, return the folder; else return single CSV path
-        if len(csv_files) == 1:
-            return os.path.abspath(csv_files[0])
-        else:
-            return os.path.abspath(dataset_path)
 
     # 4. Direct file URLs
     if path_or_url.startswith("http"):
