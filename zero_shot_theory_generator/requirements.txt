@@ -13,3 +13,4 @@ requests
 google-generativeai
 kaggle
 kagglehub
+mlcroissant
